@@ -1,0 +1,230 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Loader made by skyr0</title>
+    <link rel="icon" type="image/png" href="https://images-ext-1.discordapp.net/external/lnBCrrjFSHgWpCANVoBNJ2sS9PhISTui_FsKnLg__5c/%3Fsize%3D512/https/cdn.discordapp.com/avatars/1336506661803655248/8db0e09841a4aec4d69c9e827eb30e49.png?format=webp&quality=lossless">
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background: #1e1e1e;
+            color: #ffffff;
+            margin: 0;
+            overflow: hidden;
+        }
+        video.bg-video {
+            position: fixed;
+            right: 0;
+            bottom: 0;
+            min-width: 100%;
+            min-height: 100%;
+            z-index: -1;
+        }
+        .auth-container, .menu-container, .content-container {
+            background: rgba(44, 44, 44, 0.9);
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.7);
+            margin: 20px auto;
+            width: 300px;
+            text-align: center;
+            transition: all 0.5s ease;
+        }
+        .auth-container input {
+            width: 100%;
+            padding: 10px;
+            margin: 10px 0;
+            border: none;
+            border-radius: 5px;
+            background: #333;
+            color: #fff;
+        }
+        .auth-container button,
+        .menu-container button,
+        .content-container button {
+            width: 100%;
+            padding: 10px;
+            margin: 10px 0;
+            border: none;
+            border-radius: 5px;
+            background: #8e44ad; /* Purple AF */
+            color: white;
+            cursor: pointer;
+            transition: background 0.3s ease;
+        }
+        .auth-container button:hover,
+        .menu-container button:hover,
+        .content-container button:hover {
+            background: #732d91; /* Darker Purple for hover */
+        }
+        .menu-container h2 {
+            margin-bottom: 10px;
+            border-bottom: 1px solid #444;
+            padding-bottom: 5px;
+        }
+        .logo-container {
+            margin-top: 20px;
+            perspective: 1000px;
+        }
+        .logo-container img {
+            width: 100px;
+            transition: transform 0.2s ease-out;
+        }
+        #rotatingText {
+            margin-top: 10px;
+            font-size: 16px;
+            color: white;
+            opacity: 0;
+            transition: opacity 2s ease-in-out;
+        }
+    </style>
+</head>
+<body>
+
+<video class="bg-video" id="bgVideo" style="display:none;" autoplay loop muted>
+    <source src="https://cdn.discordapp.com/attachments/1233881458104598613/1348464214641082468/516e9671-7313-4403-ad1a-cf3e060752a3.mp4?ex=67fd0a6a&is=67fbb8ea&hm=f69d3d02962a024279006412529b90360b573352886b2042e192a3aa60fc193d&" type="video/mp4">
+</video>
+
+<audio id="bgAudio" src="https://cdn.discordapp.com/attachments/1340954069958922281/1361087267720139044/stopplayin.mp3?ex=67fd7acc&is=67fc294c&hm=2b544d58e888c2f9f4838f26fc0b089de3365208ca538137783a7a012d94fc12&" loop></audio>
+
+<div class="auth-container" id="authPage">
+    <h2>Enter Key</h2>
+    <input type="text" id="authKey" placeholder="Enter your access key">
+    <button onclick="validateKey()">Submit</button>
+</div>
+
+<div class="menu-container" id="menuPage" style="display: none;">
+    <h2>Welcome</h2>
+    <button onclick="openPage('leaksPage')">Leaks</button>
+    <button onclick="openPage('audiosPage')">Audios</button>
+    <button onclick="openPage('scriptsPage')">Scripts</button>
+    <button onclick="openPage('infoPage')">Info</button>
+    <button onclick="openPage('rbxmsPage')">RBXMS</button> <!-- New button for RBXMS -->
+    
+    <div class="logo-container">
+        <img src="https://images-ext-1.discordapp.net/external/lnBCrrjFSHgWpCANVoBNJ2sS9PhISTui_FsKnLg__5c/%3Fsize%3D512/https/cdn.discordapp.com/avatars/1336506661803655248/8db0e09841a4aec4d69c9e827eb30e49.png?format=webp&quality=lossless" alt="Logo" id="logoImg">
+        <div id="rotatingText"></div>
+    </div>
+</div>
+
+<div class="content-container" id="leaksPage" style="display: none;">
+    <h2>Leaks for other games!</h2>
+    <button onclick="window.open('soon')">my executer really soon</button>
+    <button onclick="window.open('soon')">SOON</button>
+    <button onclick="window.open('soon')">SOON</button>
+    <button onclick="window.open('soon')">SOON</button>
+    <button onclick="window.open('soon')">SOON</button>
+    <button onclick="goBack()">Go Back</button>
+</div>
+
+<div class="content-container" id="audiosPage" style="display: none;">
+    <h2>Audios!</h2>
+    <button onclick="window.open('later')">meh maybe later</button>
+    <button onclick="window.open('later')">meh mayber later</button>
+    <button onclick="window.open('later')">meh maybe later</button>
+    <button onclick="window.open('later')">meh maybe later</button>
+    <button onclick="window.open('later')">Meh maybe later</button>
+    <button onclick="goBack()">Go Back</button>
+</div>
+
+<div class="content-container" id="scriptsPage" style="display: none;">
+    <h2>require scripts</h2>
+    <button onclick="window.open('https://cdn.discordapp.com/attachments/1340954069958922281/1361104547979858050/scripts.txt?ex=67fd8ae4&is=67fc3964&hm=f511addadf08a2d2ea08f2110f83da46caf02767382cc246a666b60be995fb78&')">require script pack</button>
+    <button onclick="window.open('https://cdn.discordapp.com/attachments/1340954069958922281/1361103747970892047/scripts_pack_updated_to_be_brainrot.txt?ex=67fd8a25&is=67fc38a5&hm=dd5e50f02cbc06b522253805d5e2de03dce5bc07da75f305cc186a965cb3cfe9&')">idk brainrot pack</button>
+    <button onclick="window.open('https://cdn.discordapp.com/attachments/1340954069958922281/1361103404289626234/requires.txt?ex=67fd89d3&is=67fc3853&hm=a1b9bda758e8a06bb6080bc07dfb3f5cc360c27f998f077120f0c3bbecfb8297&')">rare requires</button>
+    <button onclick="window.open('https://cdn.discordapp.com/attachments/1340954069958922281/1361103403861934231/realesed_skyr0.txt?ex=67fd89d3&is=67fc3853&hm=92d01057b99c964b44f641bb00c388a922e66904faf14b780ec22770708b1608&')">my require</button>
+    <button onclick="window.open('https://cdn.discordapp.com/attachments/1340954069958922281/1361103645084745898/text.txt?ex=67fd8a0d&is=67fc388d&hm=b2e2ba471b95f755db9128b3d4330ce352749a29a06cc09be4adbe8f5be799b8&')">known requires</button>
+    <button onclick="goBack()">Go Back</button>
+</div>
+
+<div class="content-container" id="infoPage" style="display: none;">
+    <h2>Info leaks if they mean</h2>
+    <button onclick="window.open('soon')">SOON</button>
+    <button onclick="window.open('soon')">SOON</button>
+    <button onclick="window.open('soon')">SOON</button>
+    <button onclick="window.open('soon')">SOON</button>
+    <button onclick="window.open('soon')">SOON</button>
+    <button onclick="goBack()">Go Back</button>
+</div>
+
+<div class="content-container" id="rbxmsPage" style="display: none;">
+    <h2>RBXMS and rbxls</h2>
+    <button onclick="window.open('https://cdn.discordapp.com/attachments/1340954069958922281/1361103171988095176/Rest-in-a-Beach-Simulator.rbxl?ex=67fd899c&is=67fc381c&hm=14246ea180f6d96638c203c755ce8c7f77b6962bde0b0f83be989bfc59ca1ca8&')">Rest-in-a-Beach-Simulator rbxl</button>
+    <button onclick="window.open('https://cdn.discordapp.com/attachments/1340954069958922281/1361103325302620240/bypass_1.rbxl?ex=67fd89c0&is=67fc3840&hm=70aa92d564e541ba96856646e94563eb7b93e9a6df31c1670f8e4696ce906f5a&')">mainmodule bypass rbxl</button>
+    <button onclick="window.open('https://cdn.discordapp.com/attachments/1340954069958922281/1361103172705321110/Ro-Xploit_V7.rbxm?ex=67fd899c&is=67fc381c&hm=e8cb7c85415d6d93dfe13118b6245dde9228ec7d4630dd0f011a5a3205f5723f&')">ro sploit v7 rbxm</button>
+	<button onclick="window.open('https://cdn.discordapp.com/attachments/1340954069958922281/1361103219706826934/41325_skyr0.rbxm?ex=67fd89a7&is=67fc3827&hm=32d06ca58c839f39bc53074847ff56ead3728362f3df17ffdb06258877fc186c&')">my skyr0 rbxm</button>
+	<button onclick="window.open('https://cdn.discordapp.com/attachments/1340954069958922281/1361103264828883106/d00gerguiv2.rbxl?ex=67fd89b2&is=67fc3832&hm=25e7d46bb6c139aae406929b204cc024106884ea770f50db53ee7a4583e82453&')">doogergui rbxl</button>
+	<button onclick="window.open('https://cdn.discordapp.com/attachments/1340954069958922281/1361103172340551781/Roblox_Haxx_SS.rbxm?ex=67fd899c&is=67fc381c&hm=c17f23ae23fca8fca6e9ec735620aaa785bb5e448154c2c2cbc5a756e55765a6&')">real hax rbxm</button>
+    <button onclick="goBack()">Go Back</button>
+</div>
+
+<script>
+    const validKeys = {
+        "8xxesyxx8real": "Hello friend :D",
+        "dariustd123123": "Hello sigma darius",
+        "skyr0.v3 king": "HEY KINGGG",
+        "tdskeleton22": "hello sigma skeleton!"
+    };
+
+    function validateKey() {
+        const userKey = document.getElementById('authKey').value;
+        if (validKeys[userKey]) {
+            alert(validKeys[userKey]);
+            document.getElementById('authPage').style.display = 'none';
+            document.getElementById('menuPage').style.display = 'block';
+            document.getElementById('bgVideo').style.display = 'block';
+            document.getElementById('bgAudio').play();
+        } else {
+            alert('Invalid Key!');
+        }
+    }
+
+    function openPage(pageId) {
+        document.getElementById('menuPage').style.display = 'none';
+        let pages = ["leaksPage", "audiosPage", "scriptsPage", "infoPage", "rbxmsPage"];
+        pages.forEach(id => document.getElementById(id).style.display = 'none');
+        document.getElementById(pageId).style.display = 'block';
+    }
+
+    function goBack() {
+        let pages = ["leaksPage", "audiosPage", "scriptsPage", "infoPage", "rbxmsPage"];
+        pages.forEach(id => document.getElementById(id).style.display = 'none');
+        document.getElementById('menuPage').style.display = 'block';
+    }
+
+    document.addEventListener('mousemove', function(e) {
+        const logo = document.getElementById('logoImg');
+        if (document.getElementById('menuPage').style.display === 'block') {
+            let centerX = window.innerWidth / 2;
+            let centerY = window.innerHeight / 2;
+            let offsetX = (e.clientX - centerX) / 20;
+            let offsetY = (e.clientY - centerY) / 20;
+            logo.style.transform = `rotateY(${offsetX}deg) rotateX(${-offsetY}deg)`;
+        } else {
+            logo.style.transform = 'rotateY(0deg) rotateX(0deg)';
+        }
+    });
+
+    const rotatingTexts = [
+        "Hey how's your day?",
+        "skyr0.v3 on discord k?",
+        "guns.lol/skyr0 for my socials"
+    ];
+    let textIndex = 0;
+    const textElement = document.getElementById('rotatingText');
+
+    function rotateText() {
+        textElement.style.opacity = 0;
+        setTimeout(() => {
+            textElement.innerText = rotatingTexts[textIndex];
+            textElement.style.opacity = 1;
+            textIndex = (textIndex + 1) % rotatingTexts.length;
+        }, 2000);
+    }
+
+    setInterval(rotateText, 6000);
+    rotateText();
+</script>
+</body>
+</html>
